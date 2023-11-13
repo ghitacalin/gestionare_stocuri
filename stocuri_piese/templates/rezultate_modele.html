@@ -1,0 +1,98 @@
+﻿<style>
+    #alert{
+        color: red;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .background-success{
+        background: rgba(240, 234, 234, 1);
+    }
+    
+    #cautare-efectuta{
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 18px;
+        margin-left: 7%;
+        margin-top: 15px;
+        letter-spacing: 0px;
+        word-spacing: 2.2px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+    }
+
+    #rezultate{
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 16px;
+        margin-left: 7%;
+        margin-top:15px;
+        letter-spacing: 0px;
+        word-spacing: 2.2px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+    }
+
+    .cod-piesa{
+        color: #dc3545;
+    }
+
+    .custom-alert{
+        max-width: 400px;
+        margin-left: 7%;
+    }
+
+    .table{
+        margin-left: 7%;
+    }
+
+    .table thead th{
+        background-color: #e3342f;
+        color: #ffffff;
+        text-align: center;
+    }
+</style>
+
+{% extends 'base.html' %}
+
+{% block title %} Rezultate cautare {% endblock %}
+
+{% block content %}
+
+    <p id="cautare-efectuta">Căutare efectuată pentru codul de piesă: <span class="cod-piesa">{{ cod_piesa_input }}</span></p>
+    
+{% if rezultate %}
+    <p id = "rezultate">Rezultatele cautarii dvs se afla in tabelul de mai jos</p>
+    <div class="container-fluid mt-4">     
+        <table class="table table-bordered table-striped" style="max-width: 25%; margin-left: 8%">
+            <thead class="thead-danger text-white text-center">
+                <tr>
+                    <th>Model compatibil</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for rezultat in rezultate %}
+                <tr>
+                    <td>{{rezultat.model}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+<script>
+    document.body.classList.add("background-success");
+</script>
+
+{% else%}
+<div class="alert alert-danger custom-alert">
+    <strong>Verifica cu atentie!</strong> Nu s-au gasit modele disponibile pentru codul de piesa {{ cod_piesa_input }} sau ati introdus un cod eronat.
+</div>
+{% endif%}
+
+{% endblock %}

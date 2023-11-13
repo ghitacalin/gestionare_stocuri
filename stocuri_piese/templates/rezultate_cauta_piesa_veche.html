@@ -1,0 +1,103 @@
+﻿<style>
+    #alert{
+        color: red;
+        font-size: 16px;
+    }
+
+    #search{
+        font-size: 16px;
+    }
+
+    .background-success{
+        background: rgba(240, 234, 234, 1);
+    }
+
+    #cautare-efectuata{
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 18px;
+        margin-left: 7%;
+        margin-top: 15px;
+        letter-spacing: 0px;
+        word-spacing: 2.2px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+    }
+    .model{
+        color: #dc3545;
+    }
+    
+    .custom-alert{
+        max-width: 400px;
+        margin-left: 7%;
+    }
+
+    #rezultate-cautare{
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 16px;
+        margin-left: 7%;
+        margin-top: 15px;
+        letter-spacing: 0px;
+        word-spacing: 2.2px;
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none solid rgb(68, 68, 68);
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+    }
+
+    .table thead th{
+        background-color: #e3342f;
+        color: #ffffff;
+    }
+</style>
+
+{% extends 'base.html' %}
+
+{% block title %} Rezultate cautare {% endblock %}
+
+{% block content %}
+
+    <p id="cautare-efectuata">Căutare efectuată pentru modelul:<span class="model"> {{ model_input }}</span></p>
+    
+{% if model_inexistent %}
+    <div class="alert alert-danger custom-alert">
+        <strong>Verifica cu atentie!</strong> Modelul a fost introdus eronat sau nu se regăsește în baza de date
+    </div>
+{% else %}
+    {% if rezultate %}
+        <p id = "rezultate-cautare">Rezultatele căutării dvs. se află în tabelul de mai jos</p>
+        <div class="container-fluid mt-4">
+            <table class="table table-bordered table-striped m1-5">
+                <thead class="thead-danger text-white">
+                    <tr>
+                        <th>Cod Piesa</th>
+                        <th>Denumire piesa</th>
+                        <th>Data Aviz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rezultat in rezultate %}
+                        <tr>
+                            <td>{{ rezultat.0 }}</td>
+                            <td>{{ rezultat.1 }}</td>
+                            <td>{{ rezultat.2| date:"d-m-Y H:i:s" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <script>
+        document.body.classList.add("background-success");
+    </script>
+    {% else %}
+        <div class="alert alert-danger custom-alert">
+            Nu s-au găsit piese disponibile în stocul vechi.
+        </div>
+    {% endif %}
+{% endif %}
+{%endblock %}

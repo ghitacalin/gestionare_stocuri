@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>{%block title %}Gestionare stocuri {% endblock %}</title>
+</head>
+
+<style>
+.custom-jumbotron{
+    height: 50px;
+    background: rgb(240,234,234);
+    background: linear-gradient(90deg, rgba(240,234,234,1) 3%, rgba(224,91,91,1) 55%, rgba(235,6,6,1) 82%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-h2{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 25px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #f2e2e;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(240,234,234,1) 0%,rgba(240,234,234,1) 8%,rgba(240,234,234,1) 44%,rgba(240,234,234,1) 44%,rgba(239,0,0,1) 65%,rgba(235,6,6,1) 100%);
+    
+}
+
+#selectie{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 20px;
+    margin-left: 7%;
+    letter-spacing: 0px;
+    word-spacing: 2.2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.butoane{
+    margin-left: 9%;
+}
+
+</style>
+<body>
+    <div class="jumbotron text-center bg-custom custom-jumbotron">
+        <div class="row">
+            <div class="col-md-3">
+            <img src="{% static 'images/esd.png' %}" alt="Logo">
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h2 class="custom-h2">Gestionare stocuri piese</h1>
+        </div>
+        
+    </div>
+
+    <p id="selectie">Va rugam sa alegeti una dintre variante: </p>
+
+    <div class="butoane">
+        <button class= "btn btn-danger mx-2" onclick = "window.location.href='{% url 'cautare-piesa-veche' %}'">Cauta Piesa Veche</button>
+        <button class="btn btn-danger mx-2" onclick = "window.location.href='{% url 'cautare-model' %}'">Cauta Model Compatibil</button>
+    </div>
+
+    {% block content %}{% endblock %}
+
+
+</body>
+</html>

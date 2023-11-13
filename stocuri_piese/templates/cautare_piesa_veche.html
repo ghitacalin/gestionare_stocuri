@@ -1,0 +1,40 @@
+<style>
+#cautare{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 18px;
+    margin-left: 7%;
+    margin-top: 15px;
+    letter-spacing: 0px;
+    word-spacing: 2.2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.input{
+    margin-left: 9%;
+}
+</style>
+
+
+{% extends 'base.html' %}
+
+{% block title %} Cautare Piesa Veche {% endblock %}
+
+{% block content %}
+    <p id="cautare">Cautare piesa veche</p>
+
+    <div id=formularCautarePiesa>
+        <form method="get" action="{% url 'cauta-piesa-dupa-model'%}">
+        {% csrf_token %}
+        <div class="input">
+            {{ form.model_input }}
+            <button class = "btn btn-danger mx-2" type="submit">Cauta</button>
+        </div>
+    </div>
+
+
+{% endblock %}
